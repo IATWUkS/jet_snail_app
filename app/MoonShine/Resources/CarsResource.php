@@ -29,6 +29,7 @@ class CarsResource extends Resource
     protected function afterCreated(Model $item): Model
     {
         Mail::to($item->name->email)->send(new SendAlert($item->name->name));
+
         return $item;
     }
 

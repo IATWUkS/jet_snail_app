@@ -1,0 +1,20 @@
+version: '4'
+
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./:/var/www/
+      - ./_docker/nginx/conf.d/:/etc/nginx/conf.d
+    ports:
+      - "8876:80"
+    depends_on:
+      - app
+    container_name: app_nginx
+  app:
+    build:
+        context: .
+        dockerfile: _docker/app/Dockerfile
+    volumes:
+      - ./:/var/www
+    container_name: jet_snail
